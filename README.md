@@ -15,21 +15,21 @@ The ARM64EC ABI (Application Binary Interface) introduced by Microsoft has garne
 5. **Breaking Forward Compatibility**
    Microsoft has a one-to-one mapping of registers from x86_64 to ARM64EC. This leads to significant forward compatibility issues. For instance, binaries compiled with the `-mapxf` flag using GCC and Clang today do not work on ARM64EC. This implies that future x86_64 executables will never run on AArch64 Windows machines with translation, even though there is theoretically nothing preventing this. More details on this can be found here: [Register Mapping](https://github.com/MicrosoftDocs/cpp-docs/blob/main/docs/build/arm64ec-windows-abi-conventions.md#register-mapping).
 
-6. **Intel APX Overview**
+***Intel APX Overview***
    Intel's Advanced Performance Extensions (Intel APX) is a significant update to the x86 instruction set architecture. It doubles the number of general-purpose registers (GPRs) from 16 to 32, allowing the compiler to keep more values in registers. This results in fewer loads and stores, improving performance and reducing power consumption. Intel APX also introduces new features that enhance general-purpose performance without significantly increasing silicon area or power consumption.
 
-7. **Impact on Workloads**
+****Impact on Workloads****
    The performance features introduced by Intel APX will have a limited impact on workloads that suffer from a large number of conditional branch mispredictions. However, the overall performance gains across various workloads are expected to be substantial.
 
-8. **Compatibility Issues with ARM64EC**
+**Compatibility Issues with ARM64EC**
    The one-to-one mapping of registers in ARM64EC breaks forward compatibility with Intel APX. The new GPRs introduced by Intel APX have no corresponding mapping in ARM64EC, leading to significant compatibility issues. This further complicates the development and maintenance of software across different architectures.
 
-9. **Encourages Poor Software Practices**
+6. **Encourages Poor Software Practices**
    The ARM64EC ABI encourages subpar software practices by not promoting native ARM support. For example, frameworks like Qt often do not support ARM natively, causing many applications that rely on Qt to fail to compile for ARM. Even when they do compile, the performance penalty remains significant for the reasons previously discussed.
 
-10. **Missteps with Windows RT**
+7. **Missteps with Windows RT**
    The failure of Windows RT had nothing to do with the ARM ABI. Microsoft attempted to create a walled garden by banning native ARM Win32 executables from running on Surface RT, which backfired because Windows users generally reject walled gardens. This strategic misstep contributed significantly to the downfall of Windows RT.
 
-n conclusion, ARM64EC introduces performance penalties, lacks comprehensive support from compilers and libraries, does not facilitate the creation of universal binaries, and breaks forward compatibility. These issues, combined with the compatibility problems with Intel APX, make it clear that ARM64EC is not a viable ABI and must be abandoned entirely.
+In conclusion, ARM64EC introduces performance penalties, lacks comprehensive support from compilers and libraries, does not facilitate the creation of universal binaries, and breaks forward compatibility. These issues, combined with the compatibility problems with Intel APX, make it clear that ARM64EC is not a viable ABI and must be abandoned entirely.
 
 Windows needs universal binaries like Apple does. It just shows you Microsoft is just objectively terrible for doing just basic stuff. No wonder many users want to use Linux instead so they do not need to deal with dramas like this. ARM64EC must die.
