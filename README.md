@@ -1,4 +1,4 @@
-# Why Microsoft ARM64EC ABI Needs to DIE
+# Why Microsoft ARM64EC ABI MUST DIE
 
 **What is ARM64EC?**
 
