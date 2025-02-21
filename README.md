@@ -2,6 +2,10 @@
 
 **What is ARM64EC?**
 
+ARM64EC (Emulation Compatible) is a new application binary interface (ABI) introduced by Microsoft for ARM-based Windows systems. Unlike the standard ARM64 ABI, ARM64EC is specifically designed to enable interoperability with x64 code. This is achieved by allowing ARM64EC code to coexist and interact with x64 code within the same process.
+
+**What's the problem of it?**
+
 The ARM64EC ABI (Application Binary Interface) introduced by Microsoft has garnered its fair share of criticism and rightfully so. Here are some reasons why this ABI is problematic and why it MUST die.
 1. **Performance Concerns**
    Microsoft claims that ARM64EC offers great performance, but in practice, it falls short. Unlike the native AArch64 ABI (which Microsoft refers to as the "classic ARM ABI"), certain C++ types like `std::span` and `std::string_view` are passed by memory instead of registers. This results in a performance penalty for writing C++ code. You can see my previous discussion on this here: [Link to Discussion](https://developercommunity.visualstudio.com/t/std::span-is-not-zero-cost-because-of-th/1429284). Additionally, Microsoft wastes General Purpose Registers (GPRs) on x87. And it helps nothing, 32-bit x86 software runs extremely slowly on AArch64 machines. According to Geekerwan, 32-bit x86 software loses 90% of its performance due to translation on Snapdragon X Elite machines. You can see more about this here: [Geekerwan on YouTube](https://youtu.be/Vq5g9a_CsRo?feature=shared&t=1429).
